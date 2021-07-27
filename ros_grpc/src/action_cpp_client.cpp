@@ -47,15 +47,17 @@ class ActionClient {
 };
 
 int main(int argc, char** argv) {
+  ros::init(argc, argv, "action_cpp_client");
   grpc_init();
   ActionClient Action(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
 
-  int32_t action = 6;
+  int32_t action = 5;
   int32_t state = 0;
   std::string action_id = "0000-0000-0000-0000";
   std::string type = "std_msgs/String";
   std::string data = "Action";    
   ActionReply reply = Action.callAction(action, state, action_id, type, data);
 
+  ros::spin();
   return 0;
 }
