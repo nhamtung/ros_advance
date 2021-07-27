@@ -6,6 +6,5 @@ import "ros_grpc/proto/subdir/action_msgs.proto";
 
 
 service Action_grpc {
-  rpc ExecuteAction (ActionRequest) returns (ActionReply) {}
-  rpc CancelAction (ActionRequest) returns (ActionReply) {}
+  rpc actionCallback (ActionRequest) returns (ActionReply) {}
 }

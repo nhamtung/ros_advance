@@ -9,7 +9,6 @@ message ActionRequest {
   string action_id = 3; 
   string type = 4;
   string data = 5;
-//  bool isReady = 6;
 }
 
 // The response message

@@ -21,16 +21,35 @@ using catkin_grpc::ros_grpc::Action_grpc;
 
 // Logic and data behind the server's behavior.
 class ActionServiceImpl final : public Action_grpc::Service {
-  Status ExecuteAction(ServerContext* context, const ActionRequest* request, ActionReply* reply) override {
-    ROS_INFO("action_cpp_server.cc - Received a request from Client");
-    std::string prefix("Hello ");
-    reply->set_message(prefix +  request->data());
+  Status actionCallback(ServerContext* context, const ActionRequest* request, ActionReply* reply) override {
+    ROS_INFO("action_cpp_server.cc - action: %d", request->action());
+    ROS_INFO("action_cpp_server.cc - state: %d", request->state());
+    ROS_INFO("action_cpp_server.cc - action_id: %s", request->action_id().c_str());
+    ROS_INFO("action_cpp_server.cc - type: %s", request->type().c_str());
+    ROS_INFO("action_cpp_server.cc - data: %s", request->data().c_str());
+    uint32_t action = request->action();
+    uint32_t state = request->state();
+    if(state == 0){
+      for (int8_t i=0; i<action; i++){
+        ROS_INFO("action_cpp_server.cc - Executed step %d", i+1);
+        sleep(1);
+      }
+      reply->set_status(3);
+      reply->set_message("Executed action done");
+      ROS_INFO("action_cpp_server.cc - SUCCESS - Executed action done!");
+    }else if(state == 1){
+      uint32_t status = 5;
+      reply->set_status(status);
+      reply->set_message("Cancel action done");
+      ROS_INFO("action_cpp_server.cc - CANCEL - Cancel action done!");
+    }
+
     return Status::OK;
   }
 };
 
 void RunServer() {
-  std::string server_address("0.0.0.0:50051");
+  std::string server_address("localhost:50051");
   ActionServiceImpl service;
 
   ServerBuilder builder;

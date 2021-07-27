@@ -19,35 +19,27 @@ using catkin_grpc::ros_grpc::Action_grpc;
 
 class ActionClient {
  public:
-  ActionClient(std::shared_ptr<Channel> channel)
-      : stub_(Action_grpc::NewStub(channel)) {}
-
-  // Assambles the client's payload, sends it and presents the response back
-  // from the server.
-  std::string SayHello(const std::string& user) {
-    // Data we are sending to the server.
+  ActionClient(std::shared_ptr<Channel> channel):stub_(Action_grpc::NewStub(channel)) {}
+  
+  ActionReply callAction(int32_t action, int32_t state, const std::string& action_id, const std::string& type, const std::string& data) {
     ActionRequest request;
-    // request.set_type(user);
-    request.set_data(user);
+    request.set_action(action);
+    request.set_state(state);
+    request.set_action_id(action_id);
+    request.set_type(type);
+    request.set_data(data);
 
-    // Container for the data we expect from the server.
     ActionReply reply;
-
-    // Context for the client. It could be used to convey extra information to
-    // the server and/or tweak certain RPC behaviors.
     ClientContext context;
-
-    // The actual RPC.
-    Status status = stub_->ExecuteAction(&context, request, &reply);
+    
+    Status status = stub_->actionCallback(&context, request, &reply);  // The actual RPC.
 
     // Act upon its status.
-    if (status.ok()) {
-      return reply.message();
-    } else {
-      std::cout << status.error_code() << ": " << status.error_message()
-                << std::endl;
-      return "RPC failed";
+    if (!status.ok()) {
+      std::cout << status.error_code() << ": " << status.error_message() << std::endl;
     }
+    ROS_INFO("action_cpp_client.cpp - status: %d - message: %s", reply.status(), reply.message().c_str());
+    return reply;
   }
 
  private:
@@ -55,15 +47,15 @@ class ActionClient {
 };
 
 int main(int argc, char** argv) {
-  // Instantiate the client. It requires a channel, out of which the actual RPCs
-  // are created. This channel models a connection to an endpoint (in this case,
-  // localhost at port 50051). We indicate that the channel isn't authenticated
-  // (use of InsecureChannelCredentials()).
   grpc_init();
-  ActionClient action(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
-  std::string user("TungNV");
-  std::string reply = action.SayHello(user);
-  std::cout << "Action received: " << reply << std::endl;
+  ActionClient Action(grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()));
+
+  int32_t action = 6;
+  int32_t state = 0;
+  std::string action_id = "0000-0000-0000-0000";
+  std::string type = "std_msgs/String";
+  std::string data = "Action";    
+  ActionReply reply = Action.callAction(action, state, action_id, type, data);
 
   return 0;
 }
