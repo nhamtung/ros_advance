@@ -27,7 +27,8 @@ class ActionClient {
   std::string SayHello(const std::string& user) {
     // Data we are sending to the server.
     ActionRequest request;
-    request.set_name(user);
+    // request.set_type(user);
+    request.set_data(user);
 
     // Container for the data we expect from the server.
     ActionReply reply;
@@ -37,7 +38,7 @@ class ActionClient {
     ClientContext context;
 
     // The actual RPC.
-    Status status = stub_->SayHello(&context, request, &reply);
+    Status status = stub_->ExecuteAction(&context, request, &reply);
 
     // Act upon its status.
     if (status.ok()) {

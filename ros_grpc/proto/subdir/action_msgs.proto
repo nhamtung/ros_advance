@@ -4,10 +4,16 @@ package catkin_grpc.ros_grpc;
 
 // The request message
 message ActionRequest {
-  string name = 1;
+  int32 action = 1;
+  int32 state = 2;
+  string action_id = 3; 
+  string type = 4;
+  string data = 5;
+//  bool isReady = 6;
 }
 
 // The response message
 message ActionReply {
-  string message = 1;
+  int32 status = 1;
+  string message = 2;
 }

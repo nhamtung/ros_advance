@@ -21,10 +21,10 @@ using catkin_grpc::ros_grpc::Action_grpc;
 
 // Logic and data behind the server's behavior.
 class ActionServiceImpl final : public Action_grpc::Service {
-  Status SayHello(ServerContext* context, const ActionRequest* request, ActionReply* reply) override {
+  Status ExecuteAction(ServerContext* context, const ActionRequest* request, ActionReply* reply) override {
     ROS_INFO("action_cpp_server.cc - Received a request from Client");
     std::string prefix("Hello ");
-    reply->set_message(prefix + request->name());
+    reply->set_message(prefix +  request->data());
     return Status::OK;
   }
 };
