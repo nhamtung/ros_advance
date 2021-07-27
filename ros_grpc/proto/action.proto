@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package catkin_grpc.ros_grpc;
+
+import "ros_grpc/proto/subdir/action_msgs.proto";
+
+// The greeting service definition.
+service Action_grpc {
+  // Sends
+  rpc SayHello (ActionRequest) returns (ActionReply) {}
+
+  // Sends another
+  rpc SayHelloAgain (ActionRequest) returns (ActionReply) {}
+}

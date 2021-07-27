@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package catkin_grpc.ros_grpc;
+
+// The request message
+message ActionRequest {
+  string name = 1;
+}
+
+// The response message
+message ActionReply {
+  string message = 1;
+}
