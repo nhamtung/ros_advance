@@ -1,3 +1,6 @@
 [submodule "git_submodule/rplidar_ros"]
 	path = git_submodule/rplidar_ros
 	url = https://github.com/Slamtec/rplidar_ros.git
+[submodule "git_submodule/ros_basic"]
+	path = git_submodule/ros_basic
+	url = https://github.com/nhamtung/ros_basic.git
