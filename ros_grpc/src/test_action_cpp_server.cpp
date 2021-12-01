@@ -6,9 +6,9 @@
 
 #include <grpc++/grpc++.h>
 
-#include "ros_grpc/proto/action.pb.h"
-#include "ros_grpc/proto/action.grpc.pb.h"
-#include "ros_grpc/proto/subdir/action_msgs.pb.h"
+#include "ros_grpc/proto/test_action.pb.h"
+#include "ros_grpc/proto/test_action.grpc.pb.h"
+#include "ros_grpc/proto/subdir/test_action_msgs.pb.h"
 
 using grpc::Server;
 using grpc::ServerBuilder;
@@ -21,7 +21,7 @@ using catkin_grpc::ros_grpc::Action_grpc;
 
 // Logic and data behind the server's behavior.
 class ActionServiceImpl final : public Action_grpc::Service {
-  Status actionCallback(ServerContext* context, const ActionRequest* request, ActionReply* reply) override {
+  Status ActionCallback(ServerContext* context, const ActionRequest* request, ActionReply* reply) override {
     ROS_INFO("action_cpp_server.cc - action: %d", request->action());
     ROS_INFO("action_cpp_server.cc - state: %d", request->state());
     ROS_INFO("action_cpp_server.cc - action_id: %s", request->action_id().c_str());

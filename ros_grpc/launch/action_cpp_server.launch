@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-  <!-- Arguments -->
-  <node pkg="ros_grpc" type="action_cpp_server" name="action_cpp_server" respawn="false" output="screen"> </node>
-
-</launch>

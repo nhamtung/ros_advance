@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package catkin_grpc.ros_grpc;
+
+import "ros_grpc/proto/subdir/test_action_msgs.proto";
+
+
+service Action_grpc {
+  rpc ActionCallback (ActionRequest) returns (ActionReply) {}
+}

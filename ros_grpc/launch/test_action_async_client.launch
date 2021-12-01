@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Arguments -->
+  <node pkg="ros_grpc" type="test_action_async_client" name="test_action_async_client" respawn="false" output="screen"> </node>
+
+</launch>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Arguments -->
+  <node pkg="ros_grpc" type="test_server" name="test_server" respawn="false" output="screen"> </node>
+
+</launch>

@@ -5,9 +5,9 @@
 
 #include <grpc++/grpc++.h>
 
-#include "ros_grpc/proto/action.pb.h"
-#include "ros_grpc/proto/action.grpc.pb.h"
-#include "ros_grpc/proto/subdir/action_msgs.pb.h"
+#include "ros_grpc/proto/test_action.pb.h"
+#include "ros_grpc/proto/test_action.grpc.pb.h"
+#include "ros_grpc/proto/subdir/test_action_msgs.pb.h"
 
 using grpc::Channel;
 using grpc::ClientContext;
@@ -32,7 +32,7 @@ class ActionClient {
     ActionReply reply;
     ClientContext context;
     
-    Status status = stub_->actionCallback(&context, request, &reply);  // The actual RPC.
+    Status status = stub_->ActionCallback(&context, request, &reply);  // The actual RPC.
 
     // Act upon its status.
     if (!status.ok()) {

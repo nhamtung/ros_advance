@@ -1,4 +1,5 @@
 - Reference link: https://github.com/CogRob/catkin_grpc_examples
+- Reference link: https://github.com/chungphb/grpc-cpp
 
 # Require 
 - Ubuntu 18.04 Bionic
@@ -10,5 +11,12 @@
     + Direct to workspace
     + Build: $catkin_make
     + Source: $source devel/setup.bash
-    + $roslaunch ros_grpc action_cpp_server.launch
-    + $roslaunch ros_grpc action_cpp_client.launch
+    + $roslaunch ros_grpc test_action_cpp_server.launch
+    + $roslaunch ros_grpc test_action_cpp_client.launch
+
+- Run example async:
+    + Direct to workspace
+    + Build: $catkin_make
+    + Source: $source devel/setup.bash
+    + $roslaunch ros_grpc test_action_async_server.launch
+    + $roslaunch ros_grpc test_action_async_client.launch
