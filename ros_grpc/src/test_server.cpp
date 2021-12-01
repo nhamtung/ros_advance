@@ -1,5 +1,4 @@
 #include "ros/ros.h"
-#include <grpc++/grpc++.h>
 #include "ros_grpc/test_action_server_lib.h"
 
 ActionServerLib_ns::ActionServerLib *actionServer;
@@ -10,10 +9,9 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
     ROS_INFO("test_server.cpp - Create node test_server"); 
     
-    // grpc_init();
-    // actionServer = new ActionServerLib_ns::ActionServerLib(n);
+    actionServer = new ActionServerLib_ns::ActionServerLib(n);
     
     ros::spin();
-    // delete(actionServer);
+    delete(actionServer);
     return 0;
 }

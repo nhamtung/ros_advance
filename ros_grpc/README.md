@@ -20,3 +20,9 @@
     + Source: $source devel/setup.bash
     + $roslaunch ros_grpc test_action_async_server.launch
     + $roslaunch ros_grpc test_action_async_client.launch
+
+- Run server OPP:
+    + Direct to workspace
+    + Build: $catkin_make
+    + $roslaunch ros_grpc test_server.launch
+    + $roslaunch ros_grpc test_action_cpp_client.launch

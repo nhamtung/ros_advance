@@ -9,8 +9,8 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES ros_grpc
+  INCLUDE_DIRS include
+  LIBRARIES ros_grpc
   CATKIN_DEPENDS roscpp rospy std_msgs grpc
 #  DEPENDS system_lib
 )
@@ -39,4 +39,7 @@ target_link_libraries(test_action_async_client ${catkin_LIBRARIES} test_action_p
 
 add_executable(test_server src/test_server.cpp)
 add_dependencies(test_server ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(test_server ${PROJECT_NAME})
+target_link_libraries(test_server ${PROJECT_NAME} ${catkin_LIBRARIES} test_action_proto)
+
+#add_executable(test_action_server_lib src/test_action_server_lib.cpp)
+#target_link_libraries(test_action_server_lib ${catkin_LIBRARIES} test_action_proto)
