@@ -35,15 +35,15 @@ add_library(
 )
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GSTREAMER_LIBRARIES})
 
-#add_executable(test_action_cpp_server src/test_action_cpp_server.cpp)
-#target_link_libraries(test_action_cpp_server ${catkin_LIBRARIES} test_action_proto)
-#add_executable(test_action_async_server src/test_action_async_server.cpp)
-#target_link_libraries(test_action_async_server ${catkin_LIBRARIES} test_action_proto)
+add_executable(test_action_cpp_server src/test_action_cpp_server.cpp)
+target_link_libraries(test_action_cpp_server ${catkin_LIBRARIES} test_action_proto)
+add_executable(test_action_async_server src/test_action_async_server.cpp)
+target_link_libraries(test_action_async_server ${catkin_LIBRARIES} test_action_proto)
 
 add_executable(test_action_cpp_client src/test_action_cpp_client.cpp)
 target_link_libraries(test_action_cpp_client ${catkin_LIBRARIES} test_action_proto)
-#add_executable(test_action_async_client src/test_action_async_client.cpp)
-#target_link_libraries(test_action_async_client ${catkin_LIBRARIES} test_action_proto)
+add_executable(test_action_async_client src/test_action_async_client.cpp)
+target_link_libraries(test_action_async_client ${catkin_LIBRARIES} test_action_proto)
 
 #add_executable(test_server src/test_server.cpp)
 #add_dependencies(test_server ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

@@ -24,7 +24,7 @@ namespace StreamLib_ns
 {
     class StreamClient{
         public:
-            StreamClient(ros::NodeHandle n, std::string address, std::string port);
+            StreamClient(ros::NodeHandle n, std::string address, std::string port, int8_t mode);
             ~StreamClient();
     };
 }

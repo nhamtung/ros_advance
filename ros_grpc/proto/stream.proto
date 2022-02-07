@@ -9,7 +9,7 @@ service StreamGrpc {
 
 // The request message
 message StreamRequest {
-  string data = 1;
+  int32 data = 1;
 }
 
 // The response message

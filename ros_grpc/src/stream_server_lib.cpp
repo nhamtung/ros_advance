@@ -7,7 +7,8 @@ namespace StreamLib_ns
             explicit StreamImpl(ros::NodeHandle n) {}
 
         private:
-            Status ReplyStreamCallback(ServerContext* context, const StreamRequest* rectangle, ServerWriter<StreamReply>* writer) override {
+            int response_status = 0;
+            Status ReplyStreamCallback(ServerContext* context, const StreamRequest* request, ServerWriter<StreamReply>* writer) override {
                 ROS_INFO("stream_server_lib - ReplyStreamCallback");
                 StreamReply feature;
                 for (int i=0; i<10; i++) {
@@ -21,7 +22,16 @@ namespace StreamLib_ns
                 }
                 return Status::OK;
             }
-            int response_status = 0;
+            Status RequestStreamCallback(ServerContext* context, ServerReader<StreamRequest>* request, StreamReply* reply) override {
+                ROS_INFO("stream_server_lib - RequestStreamCallback");
+                StreamRequest stream_request;
+                while (request->Read(&stream_request)) {
+                    ROS_INFO("stream_server_lib - stream_request: %d", stream_request.data());
+                }
+                reply->set_status(3);
+                reply->set_message("SUCCESS");              
+                return Status::OK;
+            }
     };
 
     StreamServer::StreamServer(ros::NodeHandle n, std::string address, std::string port){
