@@ -56,3 +56,23 @@ add_executable(test_stream_client test/test_stream_client.cpp)
 target_link_libraries(test_stream_client ${PROJECT_NAME} ${catkin_LIBRARIES} stream_proto)
 #add_executable(test_action_server_lib src/test_action_server_lib.cpp)
 #target_link_libraries(test_action_server_lib ${catkin_LIBRARIES} test_action_proto)
+
+## Mark executables for installation
+install(TARGETS 
+  test_action_cpp_server
+  test_action_async_server
+  test_action_cpp_client
+  test_action_async_client
+  test_stream_server 
+  test_stream_client
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+## Mark other files for installation (e.g. launch and bag files, etc.)
+install(FILES
+  launch/test_action_async_client.launch
+  launch/test_action_async_server.launch
+  launch/test_action_cpp_client.launch
+  launch/test_action_cpp_server.launch
+  launch/test_server.launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+)
