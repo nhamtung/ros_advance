@@ -21,7 +21,7 @@ using namespace message_filters;
 message_filters::Subscriber<sensor_msgs::LaserScan>* laser_scan_sub_;
 tf2_ros::MessageFilter<sensor_msgs::LaserScan>* laser_scan_filter_;
 std::shared_ptr<tf2_ros::Buffer> tf_;
-std::string odom_frame = "odom";
+std::string odom_frame_id_ = "odom";
 
 void cameraCallback(const ImageConstPtr& image, const CameraInfoConstPtr& cam_info){
   ROS_INFO("cameraCallback()");
@@ -44,7 +44,7 @@ int main(int argc, char** argv){
   ROS_INFO("ros_message_filters - Register sync topic /image and topic /camera_info");
 
   // laser_scan_sub_ = new message_filters::Subscriber<sensor_msgs::LaserScan>(nh, "/sick_safetyscanners_front/scan", 100);
-  // laser_scan_filter_ = new tf2_ros::MessageFilter<sensor_msgs::LaserScan>(*laser_scan_sub_, *tf_, odom_frame, 100, nh);
+  // laser_scan_filter_ = new tf2_ros::MessageFilter<sensor_msgs::LaserScan>(*laser_scan_sub_, *tf_, odom_frame_id_, 100, nh);
   // laser_scan_filter_->registerCallback(boost::bind(&laserReceived, _1));
   // ROS_INFO("ros_message_filters - Register sync topic /sick_safetyscanners_front/scan and tf");
 
