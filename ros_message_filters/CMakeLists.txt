@@ -10,13 +10,12 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   geometry_msgs
   message_filters
-  sick_lidar_localization
 )
 
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES ros_message_filters
-  CATKIN_DEPENDS roscpp rospy std_msgs sick_lidar_localization geometry_msgs message_filters nav_msgs sensor_msgs tf2_ros
+  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs message_filters nav_msgs sensor_msgs tf2_ros
 #  DEPENDS system_lib
 )
 
