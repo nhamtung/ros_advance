@@ -12,6 +12,7 @@ bool loadParam(){
 	if(!ros::param::get("/PORT", IPC_PORT)){
 		return false;
 	}ROS_INFO("IPC_PORT: %s", IPC_PORT.c_str());
+    return true;
 }
 
 int main(int argc, char **argv)

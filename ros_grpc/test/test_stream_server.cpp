@@ -14,6 +14,7 @@ bool loadParam(){
 	if(!ros::param::get("/PORT", IPC_PORT)){
 		return false;
 	}ROS_INFO("IPC_PORT: %s", IPC_PORT.c_str());
+    return true;
 }
 
 void grpcServerThread(ros::NodeHandle n, std::string web_server_address, std::string port){
