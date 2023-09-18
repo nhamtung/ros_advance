@@ -11,11 +11,11 @@ ENV ROBOT_TYPE="SASs_AMR" ROBOT_NAME="SASs_AMR_100"
 ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
 
 # Cài đặt các gói cơ bản
-# RUN apt-get update && apt-get install -y \
-#     build-essential \
-#     cmake \
-#     python3 \
-#     python3-pip
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    python3 \
+    python3-pip
 
 # Cài đặt ROS (Thay 'noetic' bằng phiên bản ROS bạn muốn cài đặt)
 # RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
