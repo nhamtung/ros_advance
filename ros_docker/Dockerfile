@@ -39,9 +39,9 @@ RUN sudo apt-get install libspnav-dev \
     sudo pip install ds4drv && sudo apt-get install ros-noetic-joy
 
 # Tạo thư mục làm việc và sao lưu workspace ROS
-WORKDIR /workspace
+WORKDIR /SASs_AMR_ws
 RUN mkdir -p /SASs_AMR_ws/src
-COPY ./SASs_AMR_ws /SASs_AMR_ws
+COPY $HOME/TungNV/ros_ws /SASs_AMR_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
     cd /SASs_AMR_ws && \
     catkin_make"
