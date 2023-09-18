@@ -32,7 +32,7 @@
 - Access to container: $sudo docker exec -it test_image <command>
 - Explain the option: 
     + -it: -i allows you to interact with the container by providing input, -t allocates a pseudo-TTY (terminal) for the container. Example: $sudo docker run -it ubuntu /bin/bash
-    + --device: Match port (device on host) to port (device on container)
+    + --device: Match port (device on host) to port (device on container). Example: $sudo docker run --device=/dev/ttyUSB1:/dev/ttyUSB0 my-web-server-image
     + --privileged: Allow access all device on host machine. Example: $sudo docker run --privileged my-container-image
     + -p <host_port>:<container_port>: (--publish) This option allows you to publish (or map) ports from the container to the host. It is used for network port mapping. Example: $sudo docker run -p 8080:80 my-web-server-image
     + -e: (--env) This option allows you to set environment variables within the container. It is used for configuring application settings. Example: $sudo docker run -e DATABASE_URL=postgres://user:password@host:5432/database my-app-image
