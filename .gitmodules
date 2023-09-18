@@ -13,3 +13,6 @@
 [submodule "git_submodule/agv_define"]
 	path = git_submodule/agv_define
 	url = https://github.com/nhamtung/agv_define.git
+[submodule "git_submodule/joystick_drivers"]
+	path = git_submodule/joystick_drivers
+	url = https://github.com/ros-drivers/joystick_drivers.git
