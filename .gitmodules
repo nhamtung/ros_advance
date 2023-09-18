@@ -4,3 +4,12 @@
 [submodule "git_submodule/ros_basic"]
 	path = git_submodule/ros_basic
 	url = https://github.com/nhamtung/ros_basic.git
+[submodule "git_submodule/SASs_PSx"]
+	path = git_submodule/SASs_PSx
+	url = https://github.com/nhamtung/SASs_PSx.git
+[submodule "git_submodule/agv_teleop"]
+	path = git_submodule/agv_teleop
+	url = https://github.com/nhamtung/agv_teleop.git
+[submodule "git_submodule/agv_define"]
+	path = git_submodule/agv_define
+	url = https://github.com/nhamtung/agv_define.git
