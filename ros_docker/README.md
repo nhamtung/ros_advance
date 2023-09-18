@@ -19,16 +19,16 @@
 
 # Build Image
 - Connect Internet.
-- Copy Dockerfile to home: sudo cp $HOME/.../ros_ws/src/ros_advance/ros_docker/Dockerfile $HOME
+- Copy Dockerfile to home: $sudo cp $HOME/TungNV/ros_ws/src/ros_advance/ros_docker/Dockerfile $HOME
 - Direct: $cd $HOME
-- Build the docker images: $docker build -t test_image .
+- Build the docker images: $sudo docker build -t test_image .
 - Check Docker images: $sudo docker ps
 
 # Delete Image
 - Delete docker images: $sudo docker rmi -f test_image
 
 # Run container
-- Run docker Image: $sudo docker run --privileged -it --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
+- Run docker Image: $sudo docker run --privileged -it --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container -e PASSWORD=robotics test_image
 - Access to container: $sudo docker exec -it test_image <command>
 - Explain the option: 
     + -it: -i allows you to interact with the container by providing input, -t allocates a pseudo-TTY (terminal) for the container. 
@@ -47,4 +47,23 @@
         + Example: $sudo docker run -d my-container-image
     + -v: (--volume) This option allows you to create a volume or bind mount between the host system and the container, enabling data sharing or persistence.
         + Example: $sudo docker run -v /host/folder:/container/folder my-container-image
+    + -volumes-from: This option allows a container to access the volumes of another container. It's often used when you want one container to share data with another.
+        + Example: $sudo docker run --volumes-from=my-data-container my-app-image
+
+# Check Authentication
+- Add to bashrc file: $sudo nano ~/.bashrc
+- Add:
+```
+# Xác thực mật khẩu khi người dùng truy cập container
+if [ "$PASSWORD" = "robotics" ]; then
+  # Mật khẩu đúng, thực thi ứng dụng hoặc lệnh khác ở đây
+  echo "Authentication successful. Access granted."
+  # Thực thi ứng dụng hoặc lệnh khác ở đây
+else
+  # Mật khẩu không đúng, xử lý lỗi hoặc thoát container
+  echo "Authentication failed. Access denied."
+  # Xử lý lỗi hoặc thoát container
+  exit 1
+fi
+```
 

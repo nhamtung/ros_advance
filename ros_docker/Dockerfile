@@ -10,11 +10,6 @@ ENV USERNAME="robotics" PASSWORD="robotics"
 ENV ROBOT_TYPE="SASs_AMR" ROBOT_NAME="SASs_AMR_100"
 ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
 
-# Tạo mật khẩu và lưu nó vào một tệp văn bản
-RUN echo "password" > /password.txt
-# Thực hiện cấu hình ứng dụng để sử dụng mật khẩu
-RUN /configure_robot.sh
-
 # Cài đặt các gói cơ bản
 RUN apt-get update && apt-get install -y \
     build-essential \
@@ -25,18 +20,13 @@ RUN apt-get update && apt-get install -y \
 # Cài đặt ROS
 # Thay 'noetic' bằng phiên bản ROS bạn muốn cài đặt
 RUN apt-get update && apt-get install -y \
-    ros-noetic-desktop
+    ros-noetic-ros-base
 
 # Khởi động môi trường ROS
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
 # Cài đặt và khởi động một số goi phu thuoc
-RUN apt-get update && apt-get install -y
-RUN sudo apt update && sudo apt upgrade && sudo apt install curl && sudo apt-get install libcurl4-openssl-dev
-# Install bullet (for tf):
-RUN sudo apt-get update -y && sudo apt-get install -y libbullet-dev 
-# Install jsoncpp (for sick_lidar_localization):
-RUN sudo apt-get install libjsoncpp-dev
+RUN sudo apt-get update && apt-get install -y
 # Install GRPC (for server):
 RUN sudo apt-get install ros-noetic-grpc
 # Install spnav (for joystick_drivers):
