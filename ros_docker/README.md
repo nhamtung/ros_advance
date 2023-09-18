@@ -1,6 +1,6 @@
 # Guide to package using docker
 
-# Install
+# Install docker
 - Reference link: https://docs.docker.com/desktop/install/ubuntu/
 - Install docker desktop on Ubuntu: 
     + $sudo apt-get update
@@ -17,9 +17,15 @@
 - Check docker version: $docker version
 - Check docker compose version: $docker compose version
 
-# Build 
-- Direct to folder where contain the Dockerfile file
-- Build the docker images: $docker build -t <my-ros-image> .
+# Build Image
+- Connect Internet.
+- Copy Dockerfile to home: sudo cp $HOME/.../ros_ws/src/ros_advance/ros_docker/Dockerfile $HOME
+- Direct: $cd $HOME
+- Build the docker images: $docker build -t image_name .
+- Check Docker images: $sudo docker images
 
-# Run
-- Run docker (basic): $docker run -it <my-ros-image>
+# Install Image
+- Install docker Image (basic): $sudo docker run -it image_name
+
+# Delete Image
+- Delete docker images: $sudo docker rmi -f image_name
