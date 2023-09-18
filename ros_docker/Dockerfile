@@ -4,9 +4,11 @@
 FROM ubuntu:20.04
 
 LABEL version="1.0.0" description="Example about using docker"
-MAINTAINER nhamtung <nhamtung125@gmail.com>
+# MAINTAINER nhamtung <nhamtung125@gmail.com>
 
-ENV USERNAME="robotics" PASSWORD="robotics"
+ENV USERNAME="robotics" PASSWORD="robotics" 
+ENV ROBOT_TYPE="SASs_AMR" ROBOT_NAME="SASs_AMR_100"
+ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
 
 # Cài đặt các gói cơ bản
 RUN apt-get update && \
