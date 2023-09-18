@@ -32,7 +32,7 @@
 - Access to container: $sudo docker exec -it test_image <command>
 - Explain the option: 
     + -it: -i allows you to interact with the container by providing input, -t allocates a pseudo-TTY (terminal) for the container. 
-    Example: $sudo docker run -it ubuntu /bin/bash
+        Example: $sudo docker run -it ubuntu /bin/bash
     + --device: Match port (device on host) to port (device on container). 
     Example: $sudo docker run --device=/dev/ttyUSB1:/dev/ttyUSB0 my-web-server-image
     + --privileged: Allow access all device on host machine. 
