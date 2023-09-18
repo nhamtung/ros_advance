@@ -20,26 +20,36 @@ RUN apt-get update && \
 
 # Cài đặt ROS
 # Thay 'noetic' bằng phiên bản ROS bạn muốn cài đặt
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get update && apt-get install -y \
     ros-noetic-desktop
 
 # Khởi động môi trường ROS
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
-# Cài đặt và khởi động một số tiện ích ROS
-RUN apt-get update && \
-    apt-get install -y \
-    ros-noetic-navigation \
-    ros-noetic-rosbridge-suite
+# Cài đặt và khởi động một số goi phu thuoc
+RUN apt-get update && apt-get install -y
+RUN sudo apt update && sudo apt upgrade && sudo apt install curl && sudo apt-get install libcurl4-openssl-dev
+# Install bullet (for tf):
+RUN sudo apt-get update -y && sudo apt-get install -y libbullet-dev 
+# Install jsoncpp (for sick_lidar_localization):
+RUN sudo apt-get install libjsoncpp-dev
+# Install GRPC (for server):
+RUN sudo apt-get install ros-noetic-grpc
+# Install spnav (for joystick_drivers):
+RUN sudo apt-get install libspnav-dev \
+    sudo pip install ds4drv && sudo apt-get install ros-noetic-joy
 
 # Tạo thư mục làm việc và sao lưu workspace ROS
 WORKDIR /workspace
-RUN mkdir -p /catkin_ws/src
-COPY ./catkin_ws /catkin_ws
+RUN mkdir -p /SASs_AMR_ws/src
+COPY ./SASs_AMR_ws /SASs_AMR_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
-    cd /catkin_ws && \
+    cd /SASs_AMR_ws && \
     catkin_make"
+
+RUN source devel/setup.bash
+RUN rosclean purge
+RUN roslaunch topic_pkg topic_cpp.launch
 
 # Khởi động lệnh mặc định khi container được chạy
 CMD ["bash"]
