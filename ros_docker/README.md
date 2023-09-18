@@ -9,13 +9,30 @@
     + $sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     + $sudo apt-get update
     + $sudo apt-get install docker-ce
-- Start docker: $sudo systemctl start docker
+
+    + $sudo snap install docker
+    + $sudo apt-get install docker.io
 - Enable docker: $sudo systemctl enable docker
+- Start docker: $sudo systemctl start docker
 - Stop docker: $sudo systemctl stop docker
 - Check docker status: $sudo systemctl status docker
 - Restart docker after installation: $sudo systemctl restart docker
 - Check docker version: $docker version
 - Check docker compose version: $docker compose version
+- Remove: $sudo apt-get remove docker-ce docker-ce-cli containerd.io
+
+# Authentication
+- Install apache2-utils package for htpasswd: $sudo apt-get update && sudo apt-get install apache2-utils
+- Set User (example user: robotics) and enter the Password: $sudo htpasswd -Bc /etc/docker/htpasswd robotics
+- Config Docker Deamon: $cd && sudo nano /etc/docker/daemon.json
+- Add to file:
+```
+{
+  "auth": "htpasswd:/etc/docker/htpasswd"
+}
+```
+- Restart Docker Deamon: $sudo systemctl restart docker
+- Using: $sudo docker login -u robotics -p <Password>
 
 # Build Image
 - Connect Internet.
@@ -28,7 +45,7 @@
 - Delete docker images: $sudo docker rmi -f test_image
 
 # Run container
-- Run docker Image: $sudo docker run --privileged -it --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container -e PASSWORD=robotics test_image
+- Run docker Image: $sudo docker run --privileged -it --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
 - Access to container: $sudo docker exec -it test_image <command>
 - Explain the option: 
     + -it: -i allows you to interact with the container by providing input, -t allocates a pseudo-TTY (terminal) for the container. 
