@@ -13,3 +13,5 @@
     + Init: $git submodule init
     + Update: $git submodule update
 
+- Remove submodule: $git rm -f <path-to-submodule-file>
+

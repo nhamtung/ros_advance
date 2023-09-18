@@ -10,6 +10,11 @@ ENV USERNAME="robotics" PASSWORD="robotics"
 ENV ROBOT_TYPE="SASs_AMR" ROBOT_NAME="SASs_AMR_100"
 ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
 
+# Tạo mật khẩu và lưu nó vào một tệp văn bản
+RUN echo "password" > /password.txt
+# Thực hiện cấu hình ứng dụng để sử dụng mật khẩu
+RUN /configure_robot.sh
+
 # Cài đặt các gói cơ bản
 RUN apt-get update && apt-get install -y \
     build-essential \
