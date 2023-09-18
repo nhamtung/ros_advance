@@ -49,6 +49,7 @@ RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
 RUN source devel/setup.bash
 RUN rosclean purge
 RUN roslaunch topic_pkg topic_cpp.launch
+RUN roslaunch sass_psx psx_control_manual.launch
 
 # Khởi động lệnh mặc định khi container được chạy
 CMD ["bash"]
