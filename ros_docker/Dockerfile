@@ -17,10 +17,15 @@ ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
 #     python3 \
 #     python3-pip
 
-# Cài đặt ROS
-# Thay 'noetic' bằng phiên bản ROS bạn muốn cài đặt
-RUN apt-get update && apt-get install -y \
-    ros-noetic-ros-base
+# Cài đặt ROS (Thay 'noetic' bằng phiên bản ROS bạn muốn cài đặt)
+# RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+# RUN apt install curl
+# RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+RUN apt-get update
+RUN ros-noetic-ros-base
+RUN apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+RUN apt install python3-rosdep
+RUN rosdep init && rosdep update
 
 # Khởi động môi trường ROS
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
