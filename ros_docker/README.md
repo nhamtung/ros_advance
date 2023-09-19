@@ -35,17 +35,19 @@
 - Using: $sudo docker login -u robotics -p <Password>
 
 # Build Image
-- Connect Internet.
+- Connect Internet (Host machine)
 - Copy Dockerfile to home: $sudo cp $HOME/TungNV/ros_ws/src/ros_advance/ros_docker/Dockerfile $HOME
 - Direct: $cd $HOME
-- Build the docker images: $sudo docker build -t test_image .
+- Build the docker images: $sudo docker build --no-cache -t test_image .
 - Check list of docker images: $sudo docker images
 
 # Delete Image
 - Delete docker images: $sudo docker rmi -f test_image
 
 # Run container
-- Run docker Image: $sudo docker run --privileged -it --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
+- Run docker Image: 
+    + Basic: $sudo docker run -it --name test_container test_image
+    + Option: $sudo docker run --privileged -it --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
 - Access to container: $sudo docker exec -it test_image <command>
 - Check the list of container running: $sudo docker ps
 - Explain the option: 
@@ -68,5 +70,13 @@
     + -volumes-from: This option allows a container to access the volumes of another container. It's often used when you want one container to share data with another.
         + Example: $sudo docker run --volumes-from=my-data-container my-app-image
 
+# Build and test program in Container
+- Build: $catkin_make
+- Source: $source devel/setup.bash
+- Test: $roslaunch topic_pkg topic_cpp.launch
 
-
+# Exit Container
+- Exit container: $exit
+- Check the list of container: $sudo docker ps -a
+- Stop container: $sudo docker stop test_container
+- Remove container: $sudo docker rm test_container
