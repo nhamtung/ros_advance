@@ -37,4 +37,5 @@ RUN /bin/bash -c "source devel/setup.bash"
 EXPOSE 11311
 
 # Khởi động lệnh mặc định khi container được chạy
-CMD [""roslaunch", "topic_pkg", "topic_cpp.launch""]
+# CMD ["bash"]
+CMD ["roslaunch", "topic_pkg", "topic_cpp.launch"]

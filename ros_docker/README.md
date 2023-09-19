@@ -42,13 +42,14 @@
 - Check list of docker images: $sudo docker images
 
 # Delete Image
-- Delete docker images: $sudo docker rmi -f test_image
+- Check list of images: $sudo docker images
+- Delete docker images: $sudo docker rmi -f <IMAGE_ID>
 
 # Run container
 - Run docker Image: 
     + Basic: $sudo docker run -it --name test_container test_image
     + Option: $sudo docker run --privileged -it --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
-- Access to container: $sudo docker exec -it test_image <command>
+- Access to container: $sudo docker exec -it test_container /bin/bash
 - Check the list of container running: $sudo docker ps
 - Explain the option: 
     + -it: -i allows you to interact with the container by providing input, -t allocates a pseudo-TTY (terminal) for the container. 
@@ -74,4 +75,4 @@
 - Exit container: $exit
 - Check the list of container: $sudo docker ps -a
 - Stop container: $sudo docker stop test_container
-- Remove container: $sudo docker rm test_container
+- Remove container: $sudo docker rm <CONTAINER_ID>
