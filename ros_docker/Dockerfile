@@ -28,6 +28,7 @@ RUN mkdir -p /SASs_AMR_ws/src
 COPY $HOME/TungNV/ros_ws/src /SASs_AMR_ws/src
 RUN  cd /SASs_AMR_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash"
+RUN catkin_make
 
 # Mở cổng cho ROS Master (nếu cần)
 EXPOSE 11311
