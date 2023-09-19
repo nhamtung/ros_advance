@@ -25,16 +25,7 @@
     + $sudo apt-get update
     + $sudo apt-get install apache2-utils
 - Set User (example user: robotics) and enter the Password: $sudo htpasswd -Bc /etc/docker/htpasswd nhamtung
-- Config Docker Deamon: $cd && sudo nano /etc/docker/daemon.json
-- Add to file:
-```
-{
-  "auth": "htpasswd:/etc/docker/htpasswd"
-}
-```
-- Permit access file: 
-    + $sudo chmod 777 /etc/docker/daemon.json
-    + $sudo chmod 777 /etc/docker/htpasswd
+- Permit access file: $sudo chmod 777 /etc/docker/htpasswd
 - Restart Docker Deamon: $sudo systemctl restart docker
 - Using: $sudo docker login -u robotics -p <Password>
 
@@ -52,7 +43,7 @@
 # Run container
 - Run docker Image: 
     + Basic: $sudo docker run -it --rm --user nhamtung --name test_container test_image
-    + Option: $sudo docker run --privileged -it --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
+    + Option: $sudo docker run --privileged -it --rm --user nhamtung --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
 - Access to container: $sudo docker exec -it test_container /bin/bash
 - Check the list of container running: $sudo docker ps
 - Explain the option: 

@@ -5,25 +5,29 @@ FROM ros:noetic
 
 LABEL version="1.0.0" description="Example about using docker"
 
-ENV USERNAME="robotics" PASSWORD="robotics" 
+ENV USERNAME="nhamtung" PASSWORD="12051994" 
 ENV ROBOT_TYPE="SASs_AMR" ROBOT_NAME="SASs_AMR_100"
 ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
+
+# Add User
+RUN useradd -m $USERNAME && echo "$USERNAME:$PASSWORD" | chpasswd && echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+USER $USERNAME
 
 # Khởi động môi trường ROS
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
 
 # Cai mot so goi phu thuoc
-RUN apt-get update
-RUN apt-get install -y python3 python3-pip
-RUN pip3 install ds4drv
-RUN apt-get install -y ros-$ROS_DISTRO-joy
-RUN apt-get install -y ros-$ROS_DISTRO-grpc
-RUN apt-get install -y libspnav-dev && apt install -y libx11-dev
-RUN apt-get install -y ros-$ROS_DISTRO-roslint
-RUN apt-get install -y ros-$ROS_DISTRO-tf2-ros
+RUN sudo apt-get update
+RUN sudo apt-get install -y python3 python3-pip
+RUN sudo pip3 install ds4drv
+RUN sudo apt-get install -y ros-$ROS_DISTRO-joy
+RUN sudo apt-get install -y ros-$ROS_DISTRO-grpc
+RUN sudo apt-get install -y libspnav-dev && sudo apt install -y libx11-dev
+RUN sudo apt-get install -y ros-$ROS_DISTRO-roslint
+RUN sudo apt-get install -y ros-$ROS_DISTRO-tf2-ros
 
 # Remove lib/apt
-RUN rm -rf /var/lib/apt/lists/*
+RUN sudo rm -rf /var/lib/apt/lists/*
 
 # Tạo thư mục làm việc và sao lưu workspace ROS
 WORKDIR /SASs_AMR_ws
