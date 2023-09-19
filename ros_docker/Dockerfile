@@ -15,6 +15,7 @@ USER $USERNAME
 # Sử dụng htpasswd để tạo tệp chứa mật khẩu
 RUN sudo apt-get update
 RUN sudo apt-get install -y apache2-utils
+RUN sudo mkdir -p /etc/apache2
 RUN sudo htpasswd -bc /etc/apache2/.htpasswd $USERNAME $PASSWORD
 
 # Khởi động môi trường ROS
