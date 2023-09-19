@@ -36,8 +36,7 @@
 
 # Build Image
 - Connect Internet (Host machine)
-- Copy Dockerfile to home: $sudo cp $HOME/TungNV/ros_ws/src/ros_advance/ros_docker/Dockerfile $HOME
-- Direct: $cd $HOME
+- Direct to folder contain dockerfile: $cd $HOME/TungNV/ros_ws/src/ros_advance/ros_docker
 - Build the docker images: $sudo docker build --no-cache -t test_image .
 - Check list of docker images: $sudo docker images
 
