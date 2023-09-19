@@ -31,8 +31,8 @@ RUN mkdir -p /SASs_AMR_ws/src
 COPY $HOME/TungNV/ros_ws/src /SASs_AMR_ws/src
 RUN cd /SASs_AMR_ws
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make"
-# RUN source devel/setup.bash
-RUN roscd topic_pkg
+RUN /bin/bash -c "source devel/setup.bash"
+# RUN roscd topic_pkg
 
 # Mở cổng cho ROS Master (nếu cần)
 EXPOSE 11311

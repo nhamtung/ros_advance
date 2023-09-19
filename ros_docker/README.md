@@ -21,8 +21,10 @@
 - Remove docker: $sudo apt-get purge docker-ce docker-ce-cli containerd.io
 
 # Authentication
-- Install apache2-utils package for htpasswd: $sudo apt-get update && sudo apt-get install apache2-utils
-- Set User (example user: robotics) and enter the Password: $sudo htpasswd -Bc /etc/docker/htpasswd robotics
+- Install apache2-utils package for htpasswd: 
+    + $sudo apt-get update
+    + $sudo apt-get install apache2-utils
+- Set User (example user: robotics) and enter the Password: $sudo htpasswd -Bc /etc/docker/htpasswd nhamtung
 - Config Docker Deamon: $cd && sudo nano /etc/docker/daemon.json
 - Add to file:
 ```
@@ -30,6 +32,9 @@
   "auth": "htpasswd:/etc/docker/htpasswd"
 }
 ```
+- Permit access file: 
+    + $sudo chmod 777 /etc/docker/daemon.json
+    + $sudo chmod 777 /etc/docker/htpasswd
 - Restart Docker Deamon: $sudo systemctl restart docker
 - Using: $sudo docker login -u robotics -p <Password>
 
@@ -46,7 +51,7 @@
 
 # Run container
 - Run docker Image: 
-    + Basic: $sudo docker run -it --name test_container test_image
+    + Basic: $sudo docker run -it --rm --user nhamtung --name test_container test_image
     + Option: $sudo docker run --privileged -it --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
 - Access to container: $sudo docker exec -it test_container /bin/bash
 - Check the list of container running: $sudo docker ps
@@ -65,6 +70,7 @@
         + Example: $sudo docker run --name my-container my-container-image
     + -d: (--detach) This option runs the container in the background, detaching it from your terminal so that you can continue using the terminal for other tasks.
         + Example: $sudo docker run -d my-container-image
+    + --rm: Remove container after stop
     + -v: (--volume) This option allows you to create a volume or bind mount between the host system and the container, enabling data sharing or persistence.
         + Example: $sudo docker run -v /host/folder:/container/folder my-container-image
     + -volumes-from: This option allows a container to access the volumes of another container. It's often used when you want one container to share data with another.
