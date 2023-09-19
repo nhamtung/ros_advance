@@ -70,11 +70,6 @@
     + -volumes-from: This option allows a container to access the volumes of another container. It's often used when you want one container to share data with another.
         + Example: $sudo docker run --volumes-from=my-data-container my-app-image
 
-# Build and test program in Container
-- Build: $catkin_make
-- Source: $source devel/setup.bash
-- Test: $roslaunch topic_pkg topic_cpp.launch
-
 # Exit Container
 - Exit container: $exit
 - Check the list of container: $sudo docker ps -a
