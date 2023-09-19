@@ -12,6 +12,9 @@ ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
 # Add User
 RUN useradd -m $USERNAME && echo "$USERNAME:$PASSWORD" | chpasswd && echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER $USERNAME
+# Sử dụng htpasswd để tạo tệp chứa mật khẩu
+RUN sudo apt-get install -y apache2-utils
+RUN htpasswd -bc /etc/apache2/.htpasswd $USERNAME $PASSWORD
 
 # Khởi động môi trường ROS
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
