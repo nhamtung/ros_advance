@@ -2,24 +2,23 @@
 
 # Install docker
 - Reference link: https://docs.docker.com/desktop/install/ubuntu/
-- Install docker desktop on Ubuntu: 
+- Install docker on Ubuntu: 
     + $sudo apt-get update
-    + $sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-    + $curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    + $sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    + Install dependence package: $sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+    + $curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    + $echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    + $echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     + $sudo apt-get update
-    + $sudo apt-get install docker-ce
-
-    + $sudo snap install docker
-    + $sudo apt-get install docker.io
-- Enable docker: $sudo systemctl enable docker
+    + Install docker: $sudo apt-get install docker-ce docker-ce-cli containerd.io
+    + Add user to docker group: $sudo usermod -aG docker $USER
 - Start docker: $sudo systemctl start docker
-- Stop docker: $sudo systemctl stop docker
+- Enable docker: $sudo systemctl enable docker
 - Check docker status: $sudo systemctl status docker
 - Restart docker after installation: $sudo systemctl restart docker
+- Stop docker: $sudo systemctl stop docker
 - Check docker version: $docker version
 - Check docker compose version: $docker compose version
-- Remove: $sudo apt-get remove docker-ce docker-ce-cli containerd.io
+- Remove docker: $sudo apt-get purge docker-ce docker-ce-cli containerd.io
 
 # Authentication
 - Install apache2-utils package for htpasswd: $sudo apt-get update && sudo apt-get install apache2-utils
