@@ -22,18 +22,19 @@ RUN apt-get install -y libspnav-dev && apt install -y libx11-dev
 RUN apt-get install -y ros-$ROS_DISTRO-roslint
 RUN apt-get install -y ros-$ROS_DISTRO-tf2-ros
 
+# Remove lib/apt
+RUN rm -rf /var/lib/apt/lists/*
+
 # Tạo thư mục làm việc và sao lưu workspace ROS
 WORKDIR /SASs_AMR_ws
 RUN mkdir -p /SASs_AMR_ws/src
 COPY $HOME/TungNV/ros_ws/src /SASs_AMR_ws/source
 RUN cd /SASs_AMR_ws
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make"
+RUN /bin/bash -c "source devel/setup.bash"
 
 # Mở cổng cho ROS Master (nếu cần)
 EXPOSE 11311
 
-# Run example program
-RUN /bin/bash -c "source devel/setup.bash && roslaunch topic_pkg topic_cpp.launch"
-
 # Khởi động lệnh mặc định khi container được chạy
-CMD ["bash"]
+CMD [""roslaunch", "topic_pkg", "topic_cpp.launch""]
