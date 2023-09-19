@@ -14,7 +14,7 @@ RUN useradd -m $USERNAME && echo "$USERNAME:$PASSWORD" | chpasswd && echo "$USER
 USER $USERNAME
 # Sử dụng htpasswd để tạo tệp chứa mật khẩu
 RUN sudo apt-get install -y apache2-utils
-RUN htpasswd -bc /etc/apache2/.htpasswd $USERNAME $PASSWORD
+RUN sudo htpasswd -bc /etc/apache2/.htpasswd $USERNAME $PASSWORD
 
 # Khởi động môi trường ROS
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
