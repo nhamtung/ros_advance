@@ -9,14 +9,17 @@ ENV USERNAME="nhamtung" PASSWORD="12051994"
 ENV ROBOT_TYPE="SASs_AMR" ROBOT_NAME="SASs_AMR_100"
 ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
 
-# Add User
+# Sử dụng htpasswd để tạo tệp chứa mật khẩu
+RUN apt-get update
+RUN apt-get install -y apache2-utils apache2
+RUN sudo mkdir -p /etc/docker
+RUN htpasswd -cb /etc/docker/htpasswd $USERNAME $PASSWORD
+COPY check_password.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/check_password.sh
+
+# Thêm user được dùng khi chạy các lệnh ở chỉ thị RUN CMD WORKDIR (ben duoi)
 RUN useradd -m $USERNAME && echo "$USERNAME:$PASSWORD" | chpasswd && echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER $USERNAME
-# Sử dụng htpasswd để tạo tệp chứa mật khẩu
-RUN sudo apt-get update
-RUN sudo apt-get install -y apache2-utils
-RUN sudo mkdir -p /etc/apache2
-RUN sudo htpasswd -bc /etc/apache2/.htpasswd $USERNAME $PASSWORD
 
 # Khởi động môi trường ROS
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
@@ -40,12 +43,16 @@ RUN mkdir -p /SASs_AMR_ws/src
 COPY $HOME/TungNV/ros_ws/src /SASs_AMR_ws/src
 RUN cd /SASs_AMR_ws
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make"
-RUN /bin/bash -c "source devel/setup.bash"
-# RUN roscd topic_pkg
 
-# Mở cổng cho ROS Master (nếu cần)
+# Mở cổng cho ROS Master. Thiết lập cổng mà container lắng nghe, cho phép các container khác trên cùng mạng liên lạc qua cổng này hoặc đỉ ánh xạ cổng host vào cổng này.
 EXPOSE 11311
+# EXPOSE 80
+
+# Tạo một ổ đĩa chia sẻ được giữa các container.
+# VOLUME /dir_vol
 
 # Khởi động lệnh mặc định khi container được chạy
-CMD ["bash"]
+ENTRYPOINT /usr/local/bin/check_password.sh
+# CMD ["/bin/bash"]
 # CMD ["roslaunch", "topic_pkg", "topic_cpp.launch"]
+# CMD ["/bin/bash", "-c", "source devel/setup.bash && roslaunch topic_pkg topic_cpp.launch"]

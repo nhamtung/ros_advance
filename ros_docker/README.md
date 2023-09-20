@@ -1,4 +1,5 @@
 # Guide to package using docker
+- Reference link: https://xuanthulab.net/gioi-thieu-ve-docker-lam-quen-voi-docker-tao-container.html
 
 # Install docker
 - Reference link: https://docs.docker.com/desktop/install/ubuntu/
@@ -10,6 +11,7 @@
     + $echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     + $sudo apt-get update
     + Install docker: $sudo apt-get install docker-ce docker-ce-cli containerd.io
+    + Install docker compose: $sudo apt install docker-compose
     + Add user to docker group: $sudo usermod -aG docker $USER
 - Start docker: $sudo systemctl start docker
 - Enable docker: $sudo systemctl enable docker
@@ -20,28 +22,21 @@
 - Check docker compose version: $docker compose version
 - Remove docker: $sudo apt-get purge docker-ce docker-ce-cli containerd.io
 
-# Authentication
-- Install apache2-utils package for htpasswd: 
-    + $sudo apt-get update
-    + $sudo apt-get install apache2-utils
-- Set User (example user: robotics) and enter the Password: $sudo htpasswd -Bc /etc/docker/htpasswd nhamtung
-- Permit access file: $sudo chmod 777 /etc/docker/htpasswd
-- Restart Docker Deamon: $sudo systemctl restart docker
-- Using: $sudo docker login -u robotics -p <Password>
-
 # Build Image
 - Connect Internet (Host machine)
-- Copy Dockerfile to home: $sudo cp $HOME/TungNV/ros_ws/src/ros_advance/ros_docker/Dockerfile $HOME
+- Copy Dockerfile and check_password.sh file to home: 
+    + $sudo cp $HOME/TungNV/ros_ws/src/ros_advance/ros_docker/Dockerfile $HOME
+    + $sudo cp $HOME/TungNV/ros_ws/src/ros_advance/ros_docker/check_password.sh $HOME
 - Direct: $cd $HOME
-- Build the docker images: $sudo docker build --no-cache -t test_image .
+- Build the docker images: $sudo docker build -t test_image:1.0.0 --force-rm -f Dockerfile .
 - Check list of docker images: $sudo docker images
 
 # Delete Image
 - Check list of images: $sudo docker images
-- Delete docker images: $sudo docker rmi -f <IMAGE_ID>
+- Delete docker images: $sudo docker rmi -f <image_id>
 
 # Run container
-- Run docker Image: 
+- Create the new container: 
     + Basic: $sudo docker run -it --rm --user nhamtung --name test_container test_image
     + Option: $sudo docker run --privileged -it --rm --user nhamtung --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
 - Access to container: $sudo docker exec -it test_container /bin/bash
@@ -66,9 +61,19 @@
         + Example: $sudo docker run -v /host/folder:/container/folder my-container-image
     + -volumes-from: This option allows a container to access the volumes of another container. It's often used when you want one container to share data with another.
         + Example: $sudo docker run --volumes-from=my-data-container my-app-image
+- Enter the termial container running: $sudo docker container attach <container_id>
+- Run the container which stopped: $sudo docker container start -i <container_id>
+- Run the conmand in running container: $sudo docker exec -it <container_id> <command>
 
 # Exit Container
-- Exit container: $exit
+- Exit container: exit or CTRL + Q
 - Check the list of container: $sudo docker ps -a
 - Stop container: $sudo docker stop test_container
-- Remove container: $sudo docker rm <CONTAINER_ID>
+- Remove container: $sudo docker rm <container_id>
+
+# Download the docker images
+- Download: $sudo docker pull nameimage:tag
+
+# Save the container to image
+- Stop the container: $sudo docker stop <container_id>
+- Save the container to image: $sudo docker commit <container_id> <image_id>:<version>
