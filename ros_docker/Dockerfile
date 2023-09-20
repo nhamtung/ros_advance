@@ -49,10 +49,10 @@ RUN mkdir -p /SASs_AMR_ws/src
 COPY $HOME/TungNV/ros_ws/src /SASs_AMR_ws/src
 # Đặt quyền chi user moi duoc doc cho file
 RUN chown $USERNAME:$GROUPNAME /SASs_AMR_ws/src
-RUN chmod -R u+rw /SASs_AMR_ws/src
+RUN chmod 500 /SASs_AMR_ws/src
 # Build source code
 RUN cd /SASs_AMR_ws
-# RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make"
+RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make"
 
 # Mở cổng cho ROS Master. Thiết lập cổng mà container lắng nghe, cho phép các container khác trên cùng mạng liên lạc qua cổng này hoặc đỉ ánh xạ cổng host vào cổng này.
 EXPOSE 11311
