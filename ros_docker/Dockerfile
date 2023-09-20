@@ -4,7 +4,7 @@
 FROM ros:noetic
 LABEL version="1.0.0" description="Example about using docker"
 
-ENV USERNAME="nhamtung" PASSWORD="12051994" 
+ENV GROUPNAME="PNKX" USERNAME="robotics" PASSWORD="robotics" 
 ENV ROBOT_TYPE="SASs_AMR" ROBOT_NAME="SASs_AMR_100"
 ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
 
@@ -17,13 +17,18 @@ RUN htpasswd -cb /etc/docker/htpasswd $USERNAME $PASSWORD
 COPY check_password.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/check_password.sh
 
-# Thêm user được dùng khi chạy các lệnh ở chỉ thị RUN CMD WORKDIR (ben duoi)
-RUN useradd -m $USERNAME && echo "$USERNAME:$PASSWORD" | chpasswd && echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+# Thiết lập người dùng và nhóm người dùng. Dược dùng khi chạy các lệnh ở chỉ thị RUN CMD WORKDIR (ben duoi)
+RUN groupadd -r $GROUPNAME
+RUN useradd -m -r -g $GROUPNAME $USERNAME && echo "$USERNAME:$PASSWORD" | chpasswd
+RUN echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER $USERNAME
 
 # Khởi động môi trường ROS
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
-RUN echo "/usr/local/bin/check_password.sh" >> ~/.bashrc
+RUN echo "source /usr/local/bin/check_password.sh" >> ~/.bashrc
+RUN echo 'if [ $check_pass_result == false ]; then' >> ~/.bashrc
+RUN echo "\texit" >> ~/.bashrc
+RUN echo "fi" >> ~/.bashrc
 
 # Cai mot so goi phu thuoc
 RUN sudo apt-get update
@@ -43,11 +48,11 @@ WORKDIR /SASs_AMR_ws
 RUN mkdir -p /SASs_AMR_ws/src
 COPY $HOME/TungNV/ros_ws/src /SASs_AMR_ws/src
 # Đặt quyền chi user moi duoc doc cho file
-RUN chown $USERNAME:$USERNAME /SASs_AMR_ws/src
-RUN chmod 400 /SASs_AMR_ws/src
+RUN chown $USERNAME:$GROUPNAME /SASs_AMR_ws/src
+RUN chmod -R u+rw /SASs_AMR_ws/src
 # Build source code
 RUN cd /SASs_AMR_ws
-RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make"
+# RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make"
 
 # Mở cổng cho ROS Master. Thiết lập cổng mà container lắng nghe, cho phép các container khác trên cùng mạng liên lạc qua cổng này hoặc đỉ ánh xạ cổng host vào cổng này.
 EXPOSE 11311
