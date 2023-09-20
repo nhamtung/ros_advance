@@ -2,7 +2,6 @@
 
 # Sử dụng một hệ điều hành cơ sở
 FROM ros:noetic
-
 LABEL version="1.0.0" description="Example about using docker"
 
 ENV USERNAME="nhamtung" PASSWORD="12051994" 
@@ -43,6 +42,10 @@ RUN sudo rm -rf /var/lib/apt/lists/*
 WORKDIR /SASs_AMR_ws
 RUN mkdir -p /SASs_AMR_ws/src
 COPY $HOME/TungNV/ros_ws/src /SASs_AMR_ws/src
+# Đặt quyền chi user moi duoc doc cho file
+RUN chown $USERNAME:$USERNAME /SASs_AMR_ws/src
+RUN chmod 400 /SASs_AMR_ws/src
+# Build source code
 RUN cd /SASs_AMR_ws
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make"
 
@@ -54,7 +57,7 @@ EXPOSE 11311
 # VOLUME /dir_vol
 
 # Khởi động lệnh mặc định khi container được chạy
-# ENTRYPOINT /usr/local/bin/check_password.sh
+ENTRYPOINT /usr/local/bin/check_password.sh $USERNAME $PASSWORD true
 # CMD ["/bin/bash"]
 # CMD ["roslaunch", "topic_pkg", "topic_cpp.launch"]
-CMD ["/bin/bash", "-c", "source devel/setup.bash && roslaunch topic_pkg topic_cpp.launch"]
+# CMD ["/bin/bash", "-c", "source devel/setup.bash && roslaunch topic_pkg topic_cpp.launch"]
