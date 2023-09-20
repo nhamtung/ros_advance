@@ -12,6 +12,7 @@ ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
 RUN apt-get update
 RUN apt-get install -y nano
 RUN apt-get install -y net-tools
+RUN apt-get install -y iputils-ping
 RUN apt-get install -y apache2-utils apache2
 RUN sudo mkdir -p /etc/docker
 RUN htpasswd -cb /etc/docker/htpasswd $USERNAME $PASSWORD
