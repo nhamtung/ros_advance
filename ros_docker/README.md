@@ -37,8 +37,8 @@
 
 # Run container
 - Create the new container: 
-    + Basic: $sudo docker run -it --rm --user nhamtung --name test_container test_image
-    + Option: $sudo docker run --privileged -it --rm --user nhamtung --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
+    + Basic: $sudo docker run -it --rm --name test_container test_image
+    + Option: $sudo docker run --privileged -it --rm --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
 - Access to container: $sudo docker exec -it test_container /bin/bash
 - Check the list of container running: $sudo docker ps
 - Explain the option: 
@@ -63,13 +63,13 @@
         + Example: $sudo docker run --volumes-from=my-data-container my-app-image
 - Enter the termial container running: $sudo docker container attach <container_id>
 - Run the container which stopped: $sudo docker container start -i <container_id>
-- Run the conmand in running container: $sudo docker exec -it <container_id> <command>
+- Run the conmand in running container: $sudo docker exec -it <container_name> /bin/bash
 
 # Exit Container
 - Exit container: exit or CTRL + Q
 - Check the list of container: $sudo docker ps -a
 - Stop container: $sudo docker stop test_container
-- Remove container: $sudo docker rm <container_id>
+- Remove container: $sudo docker rm -f <container_id>
 
 # Download the docker images
 - Download: $sudo docker pull nameimage:tag

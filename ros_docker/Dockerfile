@@ -11,6 +11,7 @@ ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
 
 # Sử dụng htpasswd để tạo tệp chứa mật khẩu
 RUN apt-get update
+RUN apt-get install -y nano
 RUN apt-get install -y apache2-utils apache2
 RUN sudo mkdir -p /etc/docker
 RUN htpasswd -cb /etc/docker/htpasswd $USERNAME $PASSWORD
@@ -23,6 +24,7 @@ USER $USERNAME
 
 # Khởi động môi trường ROS
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
+RUN echo "/usr/local/bin/check_password.sh" >> ~/.bashrc
 
 # Cai mot so goi phu thuoc
 RUN sudo apt-get update
@@ -52,7 +54,7 @@ EXPOSE 11311
 # VOLUME /dir_vol
 
 # Khởi động lệnh mặc định khi container được chạy
-ENTRYPOINT /usr/local/bin/check_password.sh
+# ENTRYPOINT /usr/local/bin/check_password.sh
 # CMD ["/bin/bash"]
 # CMD ["roslaunch", "topic_pkg", "topic_cpp.launch"]
-# CMD ["/bin/bash", "-c", "source devel/setup.bash && roslaunch topic_pkg topic_cpp.launch"]
+CMD ["/bin/bash", "-c", "source devel/setup.bash && roslaunch topic_pkg topic_cpp.launch"]
