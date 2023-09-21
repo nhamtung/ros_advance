@@ -7,6 +7,15 @@ entered_password="$2"
 arg_param="$3"
 
 check_pass_result=false
+
+# Hàm xử lý khi nhận tín hiệu SIGINT (CTRL+C)
+trap ctrl_c INT
+function ctrl_c() {
+    echo "CTRL+C pressed! Script terminated."
+    check_pass_result=false
+    exit 1
+}
+
 # Hàm kiểm tra mật khẩu
 check_password() {
   # Kiểm tra xem mật khẩu từ người dùng có khớp với mật khẩu đã lưu trữ

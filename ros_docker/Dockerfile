@@ -28,7 +28,7 @@ USER $USERNAME
 # Khởi động môi trường ROS
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
 RUN echo "source /usr/local/bin/check_password.sh" >> ~/.bashrc
-RUN echo 'if [ $check_pass_result == false ]; then' >> ~/.bashrc
+RUN echo 'if [ $check_pass_result != true ]; then' >> ~/.bashrc
 RUN echo "\texit" >> ~/.bashrc
 RUN echo "fi" >> ~/.bashrc
 
