@@ -5,7 +5,7 @@ FROM ros:noetic
 LABEL version="1.0.0" description="Example about using docker"
 
 ENV GROUPNAME="PNKX" USERNAME="robotics" PASSWORD="robotics" 
-ENV ROBOT_TYPE="SASs_AMR" ROBOT_NAME="SASs_AMR_100"
+ENV ROBOT_TYPE="SASs_AMR" ROBOT_NAME="SASs_AMR_250"
 ENV ROS_MASTER_URI="http://localhost:11311" ROS_HOSTNAME="localhost"
 
 # Sử dụng htpasswd để tạo tệp chứa mật khẩu
@@ -31,6 +31,9 @@ RUN echo "source /usr/local/bin/check_password.sh" >> ~/.bashrc
 RUN echo 'if [ $check_pass_result != true ]; then' >> ~/.bashrc
 RUN echo "\texit" >> ~/.bashrc
 RUN echo "fi" >> ~/.bashrc
+# Đặt quyền chi user moi duoc doc cho .bashrc file
+RUN chown $USERNAME:$GROUPNAME ~/.bashrc
+RUN chmod 500 ~/.bashrc
 
 # Cai mot so goi phu thuoc
 RUN sudo apt-get update
