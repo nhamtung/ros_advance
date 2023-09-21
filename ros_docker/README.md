@@ -71,8 +71,13 @@
 - Stop container: $sudo docker stop test_container
 - Remove container: $sudo docker rm -f <container_id>
 
-# Download the docker images
-- Download: $sudo docker pull nameimage:tag
+# Push and Pull the docker images
+- Link of docker hub: https://hub.docker.com/repositories/nhamtung
+- Upload the docker images:
+    + Login with user account of docker hub: $sudo docker login
+    + Mount the tag of docker image: $sudo docker tag test_image:1.0.0 nhamtung/test_image:1.0.0
+    + Upload docker image: $sudo docker push nhamtung/test_image:1.0.0
+- Download the docker image: $sudo docker pull test_image:1.0.0
 
 # Save the container to image
 - Stop the container: $sudo docker stop <container_id>
