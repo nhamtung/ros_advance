@@ -37,8 +37,8 @@
 
 # Run container
 - Create the new container: 
-    + Basic: $sudo docker run -it --rm --name test_container test_image
-    + Option: $sudo docker run --privileged -it --rm --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image
+    + Basic: $sudo docker run -it --rm --name test_container test_image:1.0.0
+    + Option: $sudo docker run --privileged -it --rm --device=/dev/ttyUSB0:/dev/ttyUSB0 -p 8080:11311 --name test_container test_image:1.0.0
 - Access to container: $sudo docker exec -it test_container /bin/bash
 - Check the list of container running: $sudo docker ps
 - Explain the option: 
