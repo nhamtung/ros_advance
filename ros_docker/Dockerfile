@@ -58,6 +58,8 @@ RUN chmod 500 /SASs_AMR_ws/src
 # Build source code
 RUN cd /SASs_AMR_ws
 RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make"
+# Delete source code
+RUN sudo rm -rf ./src/ros_advance/git_submodule/ros_basic/topic_pkg/src
 
 # Mở cổng cho ROS Master. Thiết lập cổng mà container lắng nghe, cho phép các container khác trên cùng mạng liên lạc qua cổng này hoặc đỉ ánh xạ cổng host vào cổng này.
 EXPOSE 11311
