@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="robot_name"        default="$(optenv ROBOT_NAME)"/>
+
+  <node pkg="grpc_sample" type="grpc_client_node" name="grpc_client_node" respawn="false" output="screen">
+  </node>
+</launch>
