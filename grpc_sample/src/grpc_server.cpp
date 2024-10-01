@@ -31,8 +31,7 @@ void RunServer() {
 
     ros::Rate loop_rate(20);
     while(ros::ok() && server_running) {
-        // Bạn có thể thêm mã khác ở đây nếu cần
-        // std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Đợi một chút
+        
         loop_rate.sleep();
         ros::spinOnce();
 
