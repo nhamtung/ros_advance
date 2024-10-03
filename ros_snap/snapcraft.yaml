@@ -1,0 +1,25 @@
+name: test-snap           # Tên gói Snap
+base: core20                   # Sử dụng Ubuntu 20.04 làm base
+version: '1.1'                 # Phiên bản của gói
+summary: Test install project with Snap       # Tóm tắt về gói Snap
+description: |
+  This is a Snap package for a ROS project that for test install with snap.
+
+grade: stable                   # 'stable' hoặc 'devel' (dành cho phát triển)
+confinement: classic            # 'strict', 'devmode', hoặc 'classic'
+
+parts:
+  ros-noetic:
+    plugin: catkin             # Sử dụng plugin catkin để xây dựng gói ROS
+    source: ./src              # Thư mục chứa mã nguồn của ROS
+    rosdistro: noetic          # Distro của ROS (ví dụ: noetic, melodic)
+    
+apps:
+  my-ros-app:
+    command: roslaunch grpc_sample grpc_server.launch  # Lệnh khởi chạy ROS
+    plugs: [network, network-bind, home]                    # Quyền truy cập vào mạng và thư mục người dùng
+    environment:
+      ROS_MASTER_URI: http://localhost:11311                # Đường dẫn đến ROS Master
+      ROS_WORKSPACE: $SNAP/ros_workspace                    # Đường dẫn workspace của ROS
+      ROS_PACKAGE_PATH: $SNAP/ros_workspace/src:$ROS_PACKAGE_PATH
+      ROBOT_NAME: SASs_AMR_250
