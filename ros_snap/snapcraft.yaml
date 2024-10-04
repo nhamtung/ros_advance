@@ -17,7 +17,14 @@ parts:
     # source-subdir: roscpp_tutorials
     # stage-packages:
     #     - ros-noetic-roslaunch
-    
+    build-packages:
+      - cmake
+      - g++
+      - python3-rosdep    # Nếu bạn cần các gói này
+    stage-packages:
+      - ros-noetic-roscpp
+      - ros-noetic-std-msgs
+      
 apps:
   tungnv-test-snap:
     command: roslaunch grpc_sample grpc_server.launch  # Lệnh khởi chạy ROS

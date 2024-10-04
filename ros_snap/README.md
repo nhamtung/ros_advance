@@ -15,7 +15,7 @@
 
 - Build Snap:
     + Direct to workspace
-    + $snapcraft --enable-experimental-extensions
+    + $snapcraft --debug
     + $sudo snap install test_snap-project_1.1_amd64.snap --devmode
 
 - Run Snap:
