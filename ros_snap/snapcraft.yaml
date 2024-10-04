@@ -15,7 +15,7 @@ parts:
     rosdistro: noetic          # Distro của ROS (ví dụ: noetic, melodic)
     
 apps:
-  my-ros-app:
+  tungnv-test-snap:
     command: roslaunch grpc_sample grpc_server.launch  # Lệnh khởi chạy ROS
     plugs: [network, network-bind, home]                    # Quyền truy cập vào mạng và thư mục người dùng
     environment:

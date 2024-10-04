@@ -14,7 +14,7 @@
 - Build Snap:
     + Direct to workspace
     + $snapcraft
-    + $sudo snap install my-ros-project_0.1_amd64.snap --devmode
+    + $sudo snap install test_snap-project_0.1_amd64.snap --devmode
 
 - Run Snap:
-    + $my-ros-project.my_ros_node
+    + $test_snap-project.tungnv-test-snap
