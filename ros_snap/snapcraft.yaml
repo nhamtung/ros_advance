@@ -11,13 +11,18 @@ confinement: classic            # 'strict', 'devmode', hoặc 'classic'
 parts:
   ros-noetic:
     plugin: catkin             # Sử dụng plugin catkin để xây dựng gói ROS
-    source: ./src              # Thư mục chứa mã nguồn của ROS
-    rosdistro: noetic          # Distro của ROS (ví dụ: noetic, melodic)
+    source: ./src              # Thư mục chứa mã nguồn của Project
+    # source: https://github.com/ros/ros_tutorials.git
+    # source-branch: noetic-devel
+    # source-subdir: roscpp_tutorials
+    # stage-packages:
+    #     - ros-noetic-roslaunch
     
 apps:
   tungnv-test-snap:
     command: roslaunch grpc_sample grpc_server.launch  # Lệnh khởi chạy ROS
     plugs: [network, network-bind, home]                    # Quyền truy cập vào mạng và thư mục người dùng
+    extensions: [ros1-noetic]
     environment:
       ROS_MASTER_URI: http://localhost:11311                # Đường dẫn đến ROS Master
       ROS_WORKSPACE: $SNAP/ros_workspace                    # Đường dẫn workspace của ROS
