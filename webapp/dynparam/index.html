@@ -19,9 +19,23 @@
     th, td {
       border: 1px solid #ddd;
       padding: 8px;
+      text-align: left;
+      position: relative;
     }
     th {
       background-color: #f2f2f2;
+    }
+    .resizable {
+      position: relative;
+    }
+    .resizer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 5px;
+      height: 100%;
+      cursor: ew-resize;
+      z-index: 1;
     }
     input[type="number"], input[type="text"], select {
       width: 100%;
@@ -33,14 +47,16 @@
   <table id="paramsTable">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Value</th>
-        <th>Action</th>
+        <th class="resizable">Name</th>
+        <th class="resizable">Type</th>
+        <th class="resizable">Description</th>
+        <th class="resizable">Min</th>
+        <th class="resizable">Max</th>
+        <th class="resizable">Value</th>
+        <th class="resizable">Action</th>
       </tr>
     </thead>
     <tbody>
-
     </tbody>
   </table>
 </body>
