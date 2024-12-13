@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Reconfigure Web</title>
+    <script src="https://cdn.jsdelivr.net/npm/roslib/build/roslib.min.js"></script>
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Dynamic Reconfigure Example</h1>
+    <div>
+        <label for="battery_low">Battery Low (%): </label>
+        <input type="number" id="battery_low" min="0" max="100" step="1" value="20">
+        <button onclick="updateBatteryLow()">Update</button>
+    </div>
+    <div id="current_value" style="margin-top: 20px;">
+        Current Value: <span id="current_battery_low">Loading...</span>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    margin: 20px;
+}
+
+#controls {
+    margin: 20px 0;
+}
+
+input[type="range"] {
+    width: 300px;
+}
+
+#param_value {
+    margin-left: 10px;
+}
