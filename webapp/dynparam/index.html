@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Reconfigure Web</title>
-    <script src="https://cdn.jsdelivr.net/npm/roslib/build/roslib.min.js"></script>
-    <script src="main.js" defer></script>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Reconfigure</title>
+  <script src="https://cdn.jsdelivr.net/npm/roslib/build/roslib.min.js"></script>
+  <script src="main.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input[type="number"], input[type="text"], select {
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-    <h1>Dynamic Reconfigure Example</h1>
-    <div>
-        <label for="battery_low">Battery Low (%): </label>
-        <input type="number" id="battery_low" min="0" max="100" step="1" value="20">
-        <button onclick="updateBatteryLow()">Update</button>
-    </div>
-    <div id="current_value" style="margin-top: 20px;">
-        Current Value: <span id="current_battery_low">Loading...</span>
-    </div>
+  <h1>Dynamic Reconfigure</h1>
+  <table id="paramsTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Value</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
 
+    </tbody>
+  </table>
 </body>
 </html>
