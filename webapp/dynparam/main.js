@@ -37,46 +37,52 @@ const ros = new ROSLIB.Ros({
   parameterUpdatesListener.subscribe((message) => {
     const paramsTable = document.getElementById('paramsTable').querySelector('tbody');
     paramsTable.innerHTML = ''; // Xóa danh sách cũ
+    let rowNumber = 1;
   
     // Lặp qua các tham số kiểu số nguyên
     message.ints.forEach(param => {
-      const row = createRow(param.name, 'int', param.value);
+      const row = createRow(rowNumber, param.name, 'int', param.value);
       updateMinMax(param.name, row);  // Cập nhật min/max cho tham số
       updateDescription(param.name, row); // Cập nhật description cho tham số
       paramsTable.appendChild(row);
+      rowNumber++;  // Tăng số thứ tự
     });
   
     // Lặp qua các tham số kiểu số thực
     message.doubles.forEach(param => {
-      const row = createRow(param.name, 'double', param.value);
+      const row = createRow(rowNumber, param.name, 'double', param.value);
       updateMinMax(param.name, row);  // Cập nhật min/max cho tham số
       updateDescription(param.name, row); // Cập nhật description cho tham số
       paramsTable.appendChild(row);
+      rowNumber++;  // Tăng số thứ tự
     });
   
     // Lặp qua các tham số kiểu chuỗi
     message.strs.forEach(param => {
-      const row = createRow(param.name, 'string', param.value);
+      const row = createRow(rowNumber, param.name, 'string', param.value);
       updateMinMax(param.name, row);  // Cập nhật min/max cho tham số
       updateDescription(param.name, row); // Cập nhật description cho tham số
       paramsTable.appendChild(row);
+      rowNumber++;  // Tăng số thứ tự
     });
   
     // Lặp qua các tham số kiểu boolean
     message.bools.forEach(param => {
-      const row = createRow(param.name, 'bool', param.value);
+      const row = createRow(rowNumber, param.name, 'bool', param.value);
       updateMinMax(param.name, row);  // Cập nhật min/max cho tham số
       updateDescription(param.name, row); // Cập nhật description cho tham số
       paramsTable.appendChild(row);
+      rowNumber++;  // Tăng số thứ tự
     });
   });
   
   // Hàm tạo một hàng trong bảng
-  function createRow(name, type, value) {
+  function createRow(rowNumber, name, type, value) {
     const row = document.createElement('tr');
     const valueCell = document.createElement('td');
   
     row.innerHTML = `
+      <td>${rowNumber}</td> <!-- Cột số thứ tự -->
       <td>${name}</td>
       <td>${type}</td>
       <td id="min-${name}"></td>
