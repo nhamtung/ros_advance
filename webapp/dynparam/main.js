@@ -79,9 +79,7 @@ const ros = new ROSLIB.Ros({
     row.innerHTML = `
       <td>${name}</td>
       <td>${type}</td>
-      <td id="desc-${name}"></td>  <!-- Cột Description -->
       <td id="min-${name}"></td>
-      <td id="max-${name}"></td>
     `;
   
     if (type === 'bool') {
@@ -92,8 +90,18 @@ const ros = new ROSLIB.Ros({
     } else {
       valueCell.innerHTML = `<input type="${type === 'int' || type === 'double' ? 'number' : 'text'}" value="${value}">`;
     }
-  
     row.appendChild(valueCell);
+    const maxCell = document.createElement('td');
+    maxCell.innerHTML = `
+      <td id="max-${name}"></td>
+    `;
+    row.appendChild(maxCell);
+
+    const descriptionCell = document.createElement('td');
+    descriptionCell.innerHTML = `
+      <td id="desc-${name}"></td>  <!-- Cột Description -->
+    `;
+    row.appendChild(descriptionCell);
   
     const actionCell = document.createElement('td');
     const updateButton = document.createElement('button');
