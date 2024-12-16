@@ -22,6 +22,13 @@ const reconfigureService = new ROSLIB.Service({
   serviceType: 'dynamic_reconfigure/Reconfigure'
 });
 
+// Tạo dịch vụ để lưu tham số
+const saveParamsService = new ROSLIB.Service({
+  ros: ros,
+  name: '/agv_dynparam/save_dynparam_runtime',
+  serviceType: 'std_srvs/Trigger'
+});
+
 let parameterDescriptions = {};
 
 // Nhận thông tin mô tả tham số
@@ -110,3 +117,15 @@ function updateParameter(name, type, button) {
     console.log(`Updated ${name} to ${value}`, result);
   });
 }
+
+
+// Lắng nghe sự kiện click nút Save
+document.getElementById('saveButton').addEventListener('click', () => {
+  saveParamsService.callService(new ROSLIB.ServiceRequest(), (result) => {
+    if (result.success) {
+      alert('Parameters saved successfully!');
+    } else {
+      alert(`Failed to save parameters: ${result.message}`);
+    }
+  });
+});
