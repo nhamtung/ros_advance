@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="authen.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Đăng Nhập</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Tài Khoản:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Mật Khẩu:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="remember-me">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Lưu Mật Khẩu</label>
+            </div>
+            <button type="submit" class="login-btn">Đăng Nhập</button>
+        </form>
+    </div>
+
+    <script src="authen.js"></script>
+</body>
+</html>
