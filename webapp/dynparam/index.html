@@ -19,7 +19,7 @@
     th, td {
       border: 1px solid #ddd;
       padding: 8px;
-      text-align: left;
+      text-align: center;
       position: relative;
     }
     th {
@@ -39,6 +39,18 @@
     }
     input[type="number"], input[type="text"], select {
       width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
@@ -47,18 +59,17 @@
   <table id="paramsTable">
     <thead>
       <tr>
-        <th class="resizable" style="width: 5%; text-align: center;">No.</th>
-        <th class="resizable" style="width: 20%; text-align: center;">Name</th>
-        <th class="resizable" style="width: 5%; text-align: center;">Type</th>
-        <th class="resizable" style="width: 10%; text-align: center;">Min</th>
-        <th class="resizable" style="width: 15%; text-align: center;">Value</th>
-        <th class="resizable" style="width: 10%; text-align: center;">Max</th>
-        <th class="resizable" style="width: 50%; text-align: center;">Description</th>
-        <th class="resizable" style="width: 15%; text-align: center;">Action</th>
+        <th class="resizable" style="width: 5%;">No.</th>
+        <th class="resizable" style="width: 20%;">Name</th>
+        <th class="resizable" style="width: 5%;">Type</th>
+        <th class="resizable" style="width: 10%;">Min</th>
+        <th class="resizable" style="width: 10%;">Value</th>
+        <th class="resizable" style="width: 10%;">Max</th>
+        <th class="resizable" style="width: 50%;">Description</th>
+        <th class="resizable" style="width: 20%;">Action</th>
       </tr>
     </thead>
-    <tbody>
-    </tbody>
+    <tbody></tbody>
   </table>
 </body>
 </html>
