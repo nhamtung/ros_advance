@@ -1,60 +1,93 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center; /* Căn giữa văn bản theo chiều ngang */
-    position: relative;
-    display: flex;
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    align-items: center; /* Căn giữa theo chiều dọc */
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  
-  .resizable {
-    position: relative;
-    width: auto; /* Làm cho mỗi cột có thể thay đổi độc lập */
-  }
-  
-  .resizer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 5px;
-    height: 100%;
-    cursor: ew-resize;
-    z-index: 1;
-  }
-  
-  input[type="number"], input[type="text"], select {
-    width: 100%;
-    box-sizing: border-box; /* Đảm bảo input không bị lệch với padding */
-  }
-  
-  /* Đảm bảo căn giữa các cột */
-  td:nth-child(1), /* Cột số thứ tự */
-  td:nth-child(2), /* Cột Name */
-  td:nth-child(3), /* Cột Type */
-  td:nth-child(4), /* Cột Min */
-  td:nth-child(5), /* Cột Value */
-  td:nth-child(6), /* Cột Max */
-  td:nth-child(7), /* Cột Description */
-  td:nth-child(8) /* Cột Action */ {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  position: relative;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+#tableContainer {
+  border: 1px solid #ddd;
+  margin-top: 20px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.table-wrapper {
+  overflow-y: auto;
+  max-height: 400px;
+  position: relative;
+}
+
+.table-header, .table-body {
+  display: block;
+}
+
+.table-header table, .table-body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #f2f2f2;
+  position: sticky;
+  top: 0;
+  z-index: 1; /* Đảm bảo header luôn nằm trên body */
+}
+
+/* Sticky Header Style */
+.table-body {
+  overflow-y: auto; 
+  display: block;
+  max-height: 400px; /* Chiều cao cố định cho phần body */
+}
+
+td {
+  width: 20%; /* Đảm bảo các cột có kích thước nhất quán */
+}
+
+td:nth-child(1) {
+  width: 5%;
+}
+
+td:nth-child(2) {
+  width: 20%;
+}
+
+td:nth-child(3) {
+  width: 5%;
+}
+
+td:nth-child(4) {
+  width: 10%;
+}
+
+td:nth-child(5) {
+  width: 10%;
+}
+
+td:nth-child(6) {
+  width: 10%;
+}
+
+td:nth-child(7) {
+  width: 50%;
+}
+
+td:nth-child(8) {
+  width: 30%;
+}

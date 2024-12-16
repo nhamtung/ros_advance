@@ -120,7 +120,7 @@ function updateParameter(name, type, button) {
 
 
 // Lắng nghe sự kiện click nút Save
-document.getElementById('saveButton').addEventListener('click', () => {
+document.getElementById('saveRuntime').addEventListener('click', () => {
   saveParamsService.callService(new ROSLIB.ServiceRequest(), (result) => {
     if (result.success) {
       alert('Parameters saved successfully!');
