@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // Xác thực đăng nhập
         if (username === "admin" && password === "123456") {
             console.info("dang nhap thanh cong");
-            window.location.href = "../dynparam/index.html";
+            window.location.href = "/dynparam/index.html";
+            // window.location.replace("/dynparam/index.html");
         } else {
             alert("Tài khoản hoặc mật khẩu không đúng!");
             console.info("Tài khoản hoặc mật khẩu không đúng!");
