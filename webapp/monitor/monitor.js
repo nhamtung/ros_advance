@@ -25,9 +25,11 @@ const updateLoadingStatus = (text) => {
   let startPan = { x: 0, y: 0 }; // Tọa độ chuột bắt đầu pan
   let zoomScale = 1; // Tỷ lệ zoom
   
-  // Hàm vẽ bản đồ
-  let lastMapMessage = null; // Lưu thông điệp bản đồ cuối cùng
+  // Biến lưu thông điệp bản đồ và tf_static
+  let lastMapMessage = null;
+  let tfStaticData = [];
   
+  // Hàm vẽ bản đồ
   function drawMap() {
     if (!lastMapMessage) return;
   
@@ -67,6 +69,24 @@ const updateLoadingStatus = (text) => {
       }
     }
   
+    // Vẽ các khung tọa độ từ tf_static
+    tfStaticData.forEach((tf) => {
+      const { translation, child_frame_id } = tf.transform;
+      const { x, y } = translation;
+  
+      // Chuyển đổi tọa độ tf_static sang canvas
+      const canvasX = x * cellWidth;
+      const canvasY = y * cellHeight;
+  
+      ctx.fillStyle = 'red';
+      ctx.beginPath();
+      ctx.arc(canvasX, canvasY, 5, 0, 2 * Math.PI); // Vẽ điểm
+      ctx.fill();
+      ctx.fillStyle = 'black';
+      ctx.font = '12px Arial';
+      ctx.fillText(child_frame_id, canvasX + 5, canvasY - 5); // Hiển thị tên khung
+    });
+  
     ctx.restore();
   }
   
@@ -84,6 +104,17 @@ const updateLoadingStatus = (text) => {
     } else {
       updateLoadingStatus('Đang tải bản đồ...');
     }
+  });
+  
+  // Xử lý dữ liệu tf_static từ ROS
+  const tfStaticTopic = new ROSLIB.Topic({
+    ros,
+    name: '/tf_static',
+    messageType: 'tf2_msgs/TFMessage'
+  });
+  tfStaticTopic.subscribe((message) => {
+    tfStaticData = message.transforms; // Lưu toàn bộ các khung tf_static
+    drawMap(); // Vẽ lại bản đồ để hiển thị tf_static
   });
   
   // Sự kiện pan
