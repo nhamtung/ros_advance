@@ -40,6 +40,16 @@ h2 {
     border-radius: 4px;
 }
 
+.show-password {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.show-password label {
+    margin-left: 5px;
+}
+
 .remember-me {
     display: flex;
     align-items: center;
